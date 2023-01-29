@@ -4,7 +4,7 @@ import 'package:idelivery_app/src/utils/constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:idelivery_app/src/features/onboarding/onboarding_screen.dart';
-import 'package:idelivery_app/src/features/onboarding/onboard_botton.dart';
+import 'package:idelivery_app/src/features/onboarding/onboard_button.dart';
 
 class OnboardingPage extends StatefulWidget {
   const OnboardingPage({super.key});
@@ -77,12 +77,9 @@ class _OnboardingPageState extends State<OnboardingPage> {
                             prefs.setBool('showHome', true);
                             Navigator.of(context).pushReplacement(
                               MaterialPageRoute(
-                                builder: (context) => HomePage(
-                                  title: 'Welcome',
-                                ),
+                                builder: (context) => HomePage(),
                               ),
                             );
-
                           },
                           child: onboardButton('DONE'))
                       : GestureDetector(

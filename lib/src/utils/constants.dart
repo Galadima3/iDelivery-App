@@ -37,3 +37,4 @@ final kBodyText3 = TextStyle(
 const String imageLink1 = 'https://images.unsplash.com/photo-1601887031610-d72bf3987fb2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8ZGVsaXZlcnklMjBiaWtlfGVufDB8MXwwfHw%3D&auto=format&fit=crop&w=500&q=60';
 const String imageLink2 = 'https://images.pexels.com/photos/2996306/pexels-photo-2996306.jpeg?auto=compress&cs=tinysrgb&w=600';
 const String imageLink3 = 'https://images.pexels.com/photos/5453834/pexels-photo-5453834.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1';
+const String profilePictureLink = 'https://images.pexels.com/photos/1181280/pexels-photo-1181280.jpeg?auto=compress&cs=tinysrgb&w=600';

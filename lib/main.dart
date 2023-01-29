@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 
 import 'package:idelivery_app/src/features/onboarding/onboarding_page.dart';
+import 'package:idelivery_app/src/screens/care_screen.dart';
+import 'package:idelivery_app/src/screens/home_screen.dart';
+import 'package:idelivery_app/src/screens/order_screen.dart';
+import 'package:idelivery_app/src/screens/settings_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 Future main() async {
@@ -26,59 +30,63 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       //home: const MyHomePage(title: 'Flutter Demo Home Page'),
-      home: showHome ? HomePage(title: 'Welcome',): OnboardingPage(),
+      home: showHome ? HomePage() : OnboardingPage(),
     );
   }
 }
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key, required this.title});
-
-  final String title;
+  const HomePage({super.key});
 
   @override
   State<HomePage> createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
+  int _selectedIndex = 0;
+  void _onItemTapped(int index) {
     setState(() {
-      _counter++;
+      _selectedIndex = index;
     });
   }
 
+  List screens = [HomeScreen(), OrderScreen(), CareScreen(), SettingsScreen()];
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
-      ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
+    return SafeArea(
+      child: Scaffold(
+        body: screens.elementAt(_selectedIndex),
+        bottomNavigationBar: BottomNavigationBar(
+          type: BottomNavigationBarType.shifting,
+          unselectedIconTheme: IconThemeData(color: Colors.grey),
+          unselectedLabelStyle: TextStyle(color: Colors.black),
+          selectedIconTheme: IconThemeData(color: Colors.purple),
+          selectedItemColor: Colors.purple,
+          selectedLabelStyle: TextStyle(fontWeight: FontWeight.bold),
+          showUnselectedLabels: true,
+          currentIndex: _selectedIndex,
+          onTap: _onItemTapped,
+          items: [
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              label: 'Home',
             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
+            BottomNavigationBarItem(
+              icon: Icon(Icons.work_outline),
+              label: 'Order',
             ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.phone),
+              label: 'Care',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.settings),
+              label: 'Settings',
+            )
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
