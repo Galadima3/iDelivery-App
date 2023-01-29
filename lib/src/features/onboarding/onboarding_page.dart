@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:idelivery_app/main.dart';
 import 'package:idelivery_app/src/utils/constants.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-
-import '../../common_widgets/onboard_botton.dart';
-import '../../common_widgets/onboarding_screen.dart';
+import 'package:idelivery_app/src/features/onboarding/onboarding_screen.dart';
+import 'package:idelivery_app/src/features/onboarding/onboard_botton.dart';
 
 class OnboardingPage extends StatefulWidget {
   const OnboardingPage({super.key});
@@ -14,6 +15,7 @@ class OnboardingPage extends StatefulWidget {
 
 class _OnboardingPageState extends State<OnboardingPage> {
   final _controller = PageController();
+  bool isLastPage = false;
   @override
   void dispose() {
     _controller.dispose();
@@ -27,6 +29,11 @@ class _OnboardingPageState extends State<OnboardingPage> {
         body: Stack(children: [
           PageView(
             controller: _controller,
+            onPageChanged: (index) {
+              setState(() {
+                isLastPage = (index == 2);
+              });
+            },
             children: [
               // IntroScreen(color: Colors.blue.shade300,),
               // IntroScreen(color: Colors.green,),IntroScreen(color: Colors.deepPurple,)
@@ -59,11 +66,30 @@ class _OnboardingPageState extends State<OnboardingPage> {
                         spacing: 16,
                         dotColor: Colors.white38,
                         activeDotColor: Colors.white),
-                        onDotClicked: (index) => _controller.animateToPage(index, duration: Duration(milliseconds: 500), curve: Curves.easeIn),
+                    onDotClicked: (index) => _controller.animateToPage(index,
+                        duration: Duration(milliseconds: 500),
+                        curve: Curves.easeIn),
                   ),
-                  GestureDetector(
-                    onTap: () => _controller.nextPage(duration: Duration(milliseconds: 500), curve: Curves.easeInOut),
-                    child: onboardButton('NEXT')),
+                  isLastPage
+                      ? GestureDetector(
+                          onTap: () async {
+                            final prefs = await SharedPreferences.getInstance();
+                            prefs.setBool('showHome', true);
+                            Navigator.of(context).pushReplacement(
+                              MaterialPageRoute(
+                                builder: (context) => HomePage(
+                                  title: 'Welcome',
+                                ),
+                              ),
+                            );
+
+                          },
+                          child: onboardButton('DONE'))
+                      : GestureDetector(
+                          onTap: () => _controller.nextPage(
+                              duration: Duration(milliseconds: 500),
+                              curve: Curves.easeInOut),
+                          child: onboardButton('NEXT')),
                 ],
               ),
             ),
