@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
       title: 'iDelivery',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        //primarySwatch: Colors.deepPurple,
       ),
       //home: const MyHomePage(title: 'Flutter Demo Home Page'),
       home: showHome ? HomePage() : OnboardingPage(),
