@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:idelivery_app/src/utils/constants.dart';
 import 'package:idelivery_app/src/utils/widgets.dart';
+import "package:flutter_map/flutter_map.dart";
+import "package:latlong2/latlong.dart";
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+//import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 class SenderScreen extends StatefulWidget {
   const SenderScreen({super.key});
@@ -10,6 +14,8 @@ class SenderScreen extends StatefulWidget {
 }
 
 class _SenderScreenState extends State<SenderScreen> {
+  final tomtomHQ = new LatLng(8.5060, 8.5227);
+  final String apiKey = "V3GGMasC7VeGLIjoWRg8EcVJwdV20hMb";
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -33,7 +39,45 @@ class _SenderScreenState extends State<SenderScreen> {
               ),
             ),
             SizedBox(height: 10),
-            LocationButton(text: "Reciever's Location?"),
+            GestureDetector(
+                onTap: () {
+                  showMaterialModalBottomSheet(
+                    elevation: 10,
+                    context: context,
+                    builder: (context) => Container(
+                      height: 450,
+                      width: double.infinity,
+                      //color: Colors.red,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(12)),
+                      child: FlutterMap(
+                        options: new MapOptions(center: tomtomHQ, zoom: 13.0),
+                        children: [
+                          TileLayer(
+                            urlTemplate:
+                                "https://api.tomtom.com/map/1/tile/basic/main/"
+                                "{z}/{x}/{y}.png?key={apiKey}",
+                            additionalOptions: {"apiKey": apiKey},
+                          ),
+                          MarkerLayer(
+                            markers: [
+                              new Marker(
+                                width: 80.0,
+                                height: 80.0,
+                                point: tomtomHQ,
+                                builder: (BuildContext context) => const Icon(
+                                    Icons.location_on,
+                                    size: 60.0,
+                                    color: Colors.black),
+                              ),
+                            ],
+                          )
+                        ],
+                      ),
+                    ),
+                  );
+                },
+                child: LocationButton(text: "Reciever's Location?")),
             SizedBox(height: 25),
             LocationButton(
               text: "Sender's Location?",

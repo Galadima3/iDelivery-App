@@ -41,19 +41,21 @@ class LocationButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.all(10),
-      height: 45,
-      width: 300,
-      decoration: BoxDecoration(
-          color: Colors.grey.shade300,
-          borderRadius: BorderRadius.circular(12)),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(text),
-          Icon(Icons.location_pin)
-        ],
+    return Center(
+      child: Container(
+        padding: EdgeInsets.all(10),
+        height: 45,
+        width: 300,
+        decoration: BoxDecoration(
+            color: Colors.grey.shade300,
+            borderRadius: BorderRadius.circular(12)),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(text),
+            Icon(Icons.location_pin)
+          ],
+        ),
       ),
     );
   }
