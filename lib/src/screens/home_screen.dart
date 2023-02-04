@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:idelivery_app/src/features/tab_bar/reciever_screen.dart';
 //import '../utils/widgets.dart';
 
-import 'package:idelivery_app/src/screens/sender_screen.dart';
+import 'package:idelivery_app/src/features/tab_bar/sender_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -37,9 +38,7 @@ class _HomeScreenState extends State<HomeScreen> {
               child: TabBarView(
                 children: [
                   SenderScreen(),
-                  Container(
-                    child: Center(child: Text('Reciever')),
-                  )
+                  ReceiverScreen(),
                 ],
               ),
             )

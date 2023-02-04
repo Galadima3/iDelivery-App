@@ -62,8 +62,8 @@ class _SenderScreenState extends State<SenderScreen> {
                           MarkerLayer(
                             markers: [
                               new Marker(
-                                width: 80.0,
-                                height: 80.0,
+                                width: 50.0,
+                                height: 50.0,
                                 point: tomtomHQ,
                                 builder: (BuildContext context) => const Icon(
                                     Icons.location_on,
@@ -77,10 +77,11 @@ class _SenderScreenState extends State<SenderScreen> {
                     ),
                   );
                 },
-                child: LocationButton(text: "Reciever's Location?")),
+                child: LocationButton(text: "Reciever's Location?",isIconRequired: true,)),
             SizedBox(height: 25),
             LocationButton(
               text: "Sender's Location?",
+              isIconRequired: true,
             ),
             SizedBox(
               height: 20,

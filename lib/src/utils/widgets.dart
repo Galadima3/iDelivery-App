@@ -32,31 +32,44 @@ Widget pseudoAppBar() => Padding(
       ),
     );
 
-
 class LocationButton extends StatelessWidget {
   final String text;
+  final bool isIconRequired;
   const LocationButton({
-    super.key, required this.text,
+    super.key,
+    required this.text,
+    required this.isIconRequired,
   });
 
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Container(
-        padding: EdgeInsets.all(10),
-        height: 45,
-        width: 300,
-        decoration: BoxDecoration(
-            color: Colors.grey.shade300,
-            borderRadius: BorderRadius.circular(12)),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(text),
-            Icon(Icons.location_pin)
-          ],
-        ),
-      ),
+      child: isIconRequired
+          ? Container(
+              padding: EdgeInsets.all(10),
+              height: 45,
+              width: 300,
+              decoration: BoxDecoration(
+                  color: Colors.grey.shade300,
+                  borderRadius: BorderRadius.circular(12)),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [Text(text), Icon(Icons.location_pin)],
+              ),
+            )
+          : Container(
+              padding: EdgeInsets.all(10),
+              height: 45,
+              width: 300,
+              decoration: BoxDecoration(
+                  color: Colors.grey.shade300,
+                  borderRadius: BorderRadius.circular(12)),
+              child: Row(
+                children: [
+                  Text(text),
+                ],
+              ),
+            ),
     );
   }
 }
@@ -82,11 +95,11 @@ class DeliveryMode extends StatelessWidget {
   }
 }
 
-
 class ImageTile extends StatelessWidget {
   final String imageUrl;
   const ImageTile({
-    super.key, required this.imageUrl,
+    super.key,
+    required this.imageUrl,
   });
 
   @override
@@ -97,7 +110,7 @@ class ImageTile extends StatelessWidget {
         height: 185,
         width: 250,
         child: Image.network(
-         imageUrl,
+          imageUrl,
           fit: BoxFit.cover,
         ),
       ),
