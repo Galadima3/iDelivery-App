@@ -17,7 +17,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return DefaultTabController(
       length: 2,
       child: Scaffold(
-        appBar: AppBar(title: Text('Hoorah!')),
+        appBar: AppBar(),
         body: Column(
           children: [
             TabBar(

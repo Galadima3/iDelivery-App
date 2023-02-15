@@ -27,8 +27,8 @@ class MyApp extends StatelessWidget {
       title: 'iDelivery',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        //primarySwatch: Colors.deepPurple,
-      ),
+          //primarySwatch: Colors.deepPurple,
+          ),
       //home: const MyHomePage(title: 'Flutter Demo Home Page'),
       home: showHome ? HomePage() : OnboardingPage(),
     );
@@ -50,7 +50,12 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  List screens = [HomeScreen(), OrderScreen(), CareScreen(), SettingsScreen()];
+  List screens = [
+    HomeScreen(),
+    OrderScreen(),
+    CareScreen(),
+    SettingsScreen(),
+  ];
 
   @override
   Widget build(BuildContext context) {
